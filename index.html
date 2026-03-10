@@ -26,11 +26,6 @@
 
 <body>
 
-    <!-- Background Shapes (Parallax) -->
-    <div class="bg-shape bg-shape-1" data-parallax="0.03"></div>
-    <div class="bg-shape bg-shape-2" data-parallax="0.05"></div>
-    <div class="bg-shape bg-shape-3"></div>
-
     <!-- Desktop Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -123,35 +118,76 @@
         </div>
     </section>
 
-    <!-- About De Tai & Technology -->
+    <!-- About De Tai — Cards Layout -->
     <section class="about" id="about">
         <div class="section-header reveal">
             <h2 class="title">Корпорация <span class="gradient-text shimmer-text">Hongjiu Biotech</span></h2>
+            <p class="subtitle">Ваш проводник в мир здоровья и долголетия</p>
             <div class="line"></div>
         </div>
 
-        <div class="about-content reveal">
-            <div class="about-text">
-                <p><strong>De Tai (Де Тай)</strong> — это ваш проводник в мир здоровья и долголетия. Мы являемся
-                    официальным представителем на российском рынке инновационной корпорации <em>Hongjiu Biotech</em>
-                    (Биология Хунцзю).</p>
+        <div class="about-cards">
+            <div class="about-card reveal">
+                <div class="about-card-icon"><i class="fas fa-landmark"></i></div>
+                <h3>27 лет истории</h3>
+                <p><strong>De Tai (Де Тай)</strong> — официальный представитель корпорации <em>Hongjiu Biotech</em> в России. За 27 лет создано более 170 видов пептидов.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-card-icon"><i class="fas fa-certificate"></i></div>
+                <h3>6 сертификатов</h3>
+                <p>Качество подтверждено международными стандартами: <strong>ISO 22000, ISO 9001, HACCP, HALAL, KOSHER и GRAS</strong>.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-card-icon"><i class="fas fa-microscope"></i></div>
+                <h3>Технология разреза</h3>
+                <p>Белок расщепляется до пептидов массой 500–1000 Дальтон. Они проникают в клетки напрямую, <strong>усвояемость — 98%</strong>.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-card-icon"><i class="fas fa-mountain"></i></div>
+                <h3>Чистое сырьё</h3>
+                <p>Сырьё добывается в чистейших районах тибетского высокогорья (3500 м). Никаких гормонов, химии, ГМО или тяжёлых металлов.</p>
+            </div>
+        </div>
+    </section>
 
-                <p>За 27 лет работы корпорация создала более 170 видов пептидов. Качество продукции подтверждено шестью
-                    главными международными стандартами: <strong>ISO 22000, ISO 9001, HACCP, HALAL, KOSHER и
-                        GRAS</strong>.</p>
+    <!-- How It Works — Infographic -->
+    <section class="how-it-works" id="science">
+        <div class="section-header reveal">
+            <h2 class="title">Как это <span class="gradient-text shimmer-text">работает</span></h2>
+            <p class="subtitle">От сырья до клетки — за 4 шага</p>
+            <div class="line"></div>
+        </div>
 
-                <h3 class="tech-title"><i class="fas fa-microscope gradient-text"></i> В чем секрет эффективности?</h3>
-                <p>Согласно исследованиям геронтологов, старение организма напрямую связано со снижением синтеза белка.
-                    Наша продукция решает эту проблему на 100%.</p>
-                <p>Мы используем <strong>технологию направленного биологического ферментативного разреза</strong>. Белок
-                    расщепляется до микроскопических пептидов массой всего 500–1000 Дальтон. Благодаря такой низкой
-                    массе, пептиды проникают прямо в клетки, минуя процесс переваривания в желудке. <strong>Усвояемость
-                        достигает 98%!</strong></p>
-
-                <div class="quote-box">
-                    <i class="fas fa-leaf"></i>
-                    <p>Абсолютная чистота: сырье добывается в чистейших районах тибетского высокогорья (3500 м). Никаких
-                        гормонов, химии, ГМО или тяжелых металлов.</p>
+        <div class="steps-timeline">
+            <div class="step-item reveal">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Натуральное сырьё</h3>
+                    <p>Экологически чистые источники белка с тибетского высокогорья</p>
+                </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-item reveal">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Ферментативный разрез</h3>
+                    <p>Направленное расщепление белка до микропептидов 500–1000 Да</p>
+                </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-item reveal">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Прямое усвоение</h3>
+                    <p>Пептиды проникают в клетки, минуя переваривание в желудке</p>
+                </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-item reveal">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Результат — 98%</h3>
+                    <p>Максимальная усвояемость и регенерация на клеточном уровне</p>
                 </div>
             </div>
         </div>
@@ -324,21 +360,52 @@
         </div>
     </section>
 
-    <!-- Trust / Legal Representation Section -->
-    <section class="trust reveal" id="trust">
-        <div class="trust-container">
-            <i class="fas fa-globe-asia gradient-text trust-icon"></i>
-            <h3>Официальное присутствие в РФ</h3>
-            <p class="trust-subtitle">Мы работаем легально и прозрачно. В России зарегистрированы официальные
-                юридические лица:</p>
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <strong>ООО «Де Тай» (Москва)</strong><br>
-                    <span>Зарегистрировано 05.06.2024<br>Сокольническая пл., д. 4а</span>
+    <!-- Trust / Legal + Certifications -->
+    <section class="trust" id="trust">
+        <div class="trust-container reveal">
+            <div class="trust-header">
+                <i class="fas fa-shield-alt gradient-text trust-icon"></i>
+                <h3>Гарантии качества и доверие</h3>
+            </div>
+
+            <div class="cert-ribbon">
+                <div class="cert-item reveal">
+                    <div class="cert-badge">ISO</div>
+                    <span>ISO 22000</span>
                 </div>
-                <div class="trust-item">
-                    <strong>ООО «Де Тай» (Казань)</strong><br>
-                    <span>Зарегистрировано 27.08.2025<br>ул. Меридианная, д. 4</span>
+                <div class="cert-item reveal">
+                    <div class="cert-badge">ISO</div>
+                    <span>ISO 9001</span>
+                </div>
+                <div class="cert-item reveal">
+                    <div class="cert-badge"><i class="fas fa-check"></i></div>
+                    <span>HACCP</span>
+                </div>
+                <div class="cert-item reveal">
+                    <div class="cert-badge"><i class="fas fa-moon"></i></div>
+                    <span>HALAL</span>
+                </div>
+                <div class="cert-item reveal">
+                    <div class="cert-badge"><i class="fas fa-star-of-david"></i></div>
+                    <span>KOSHER</span>
+                </div>
+                <div class="cert-item reveal">
+                    <div class="cert-badge"><i class="fas fa-leaf"></i></div>
+                    <span>GRAS</span>
+                </div>
+            </div>
+
+            <p class="trust-subtitle">Мы работаем легально и прозрачно. В России зарегистрированы официальные юридические лица:</p>
+            <div class="trust-grid">
+                <div class="trust-item reveal">
+                    <div class="trust-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <strong>ООО «Де Тай» (Москва)</strong>
+                    <span>05.06.2024 · Сокольническая пл., д. 4а</span>
+                </div>
+                <div class="trust-item reveal">
+                    <div class="trust-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <strong>ООО «Де Тай» (Казань)</strong>
+                    <span>27.08.2025 · ул. Меридианная, д. 4</span>
                 </div>
             </div>
         </div>
@@ -398,6 +465,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating Telegram Button -->
+    <a href="https://t.me/yuliya_sushkeeva" target="_blank" rel="noopener noreferrer" class="fab-telegram" aria-label="Написать в Telegram">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
 
     <!-- Spacer for bottom tab bar on mobile -->
     <div class="bottom-spacer"></div>
