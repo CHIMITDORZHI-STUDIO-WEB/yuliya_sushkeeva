@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lastKnownScrollY = window.scrollY;
         if (!navTicking) {
             requestAnimationFrame(() => {
-                navbar.classList.toggle('scrolled', lastKnownScrollY > 50);
+                if (navbar) {
+                    navbar.classList.toggle('scrolled', lastKnownScrollY > 50);
+                }
                 navTicking = false;
             });
             navTicking = true;
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 counted = true;
                 statNumbers.forEach(stat => {
                     const target = parseInt(stat.dataset.target, 10);
+                    if (isNaN(target)) return;
                     const duration = 2000;
                     const steps = duration / 16;
                     const increment = target / steps;
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             stat.textContent = Math.ceil(current);
                             requestAnimationFrame(tick);
                         } else {
-                            stat.textContent = target; // No '+' needed for typical years/tests
+                            stat.textContent = target;
                         }
                     }
                     tick();
@@ -103,7 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const sy = window.scrollY;
                     parallaxShapes.forEach(shape => {
                         const speed = parseFloat(shape.dataset.parallax);
-                        shape.style.transform = `translateY(${sy * speed * -1}px)`;
+                        if (!isNaN(speed)) {
+                            shape.style.transform = `translateY(${sy * speed * -1}px)`;
+                        }
                     });
                     pxTicking = false;
                 });
@@ -177,17 +182,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add to current
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
 
             const filterValue = btn.getAttribute('data-filter');
 
             productCards.forEach(card => {
                 if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                     card.style.display = 'flex';
-                    // Re-trigger reveal animation for smoothness
                     card.classList.remove('active');
                     setTimeout(() => card.classList.add('active'), 10);
                 } else {
@@ -204,33 +210,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDesc = document.querySelector('.modal-desc');
     const modalImg = document.querySelector('.modal-img');
 
+    function openModal(card) {
+        if (!modal || !card) return;
+
+        const titleEl = card.querySelector('h3');
+        const descEl = card.querySelector('.product-desc');
+        const imgEl = card.querySelector('.product-image img');
+
+        if (titleEl) modalTitle.textContent = titleEl.textContent;
+        if (descEl) modalDesc.textContent = descEl.textContent;
+        if (imgEl) modalImg.src = imgEl.src;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Store the element that opened the modal to restore focus later
+        modal._lastFocused = document.activeElement;
+
+        // Focus the close button for keyboard users
+        if (modalClose) {
+            setTimeout(() => modalClose.focus(), 100);
+        }
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Restore focus to the element that opened the modal
+        if (modal._lastFocused) {
+            modal._lastFocused.focus();
+            modal._lastFocused = null;
+        }
+    }
+
     // Open Modal
     document.querySelectorAll('.product-modal-trigger').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const card = e.target.closest('.product-card');
-
-            // Extract info from card
-            const title = card.querySelector('h3').textContent;
-            const desc = card.querySelector('.product-desc').textContent;
-            const imgSrc = card.querySelector('.product-image img').src;
-
-            // Update modal
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
-            modalImg.src = imgSrc;
-
-            // Show modal
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openModal(card);
         });
     });
-
-    // Close Modal functions
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
 
     if (modalClose) {
         modalClose.addEventListener('click', closeModal);
@@ -241,6 +263,40 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
+            }
+        });
+    }
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Focus trap inside modal
+    if (modal) {
+        modal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+
+            const focusable = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            if (!focusable.length) return;
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
             }
         });
     }
