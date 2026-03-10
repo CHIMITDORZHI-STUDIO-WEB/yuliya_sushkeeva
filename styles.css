@@ -985,8 +985,7 @@ h4 {
 /* ====== FOOTER ====== */
 footer {
     background: var(--white);
-    padding: 3rem 2rem 8rem;
-    /* extra padding for mobile tab bar */
+    padding: 3rem 2rem;
     text-align: center;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -1120,6 +1119,10 @@ footer p {
 
     .bottom-spacer {
         display: block;
+    }
+
+    footer {
+        padding-bottom: 7rem;
     }
 
     .hero {
