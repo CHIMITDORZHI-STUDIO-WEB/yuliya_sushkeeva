@@ -476,7 +476,7 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center 15%;
 }
 
 .floating-badge {
@@ -493,24 +493,24 @@ img {
     z-index: 5;
     font-weight: 600;
     font-family: 'Outfit';
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     animation: float-small 4s ease-in-out infinite;
     white-space: nowrap;
 }
 
 .floating-badge i {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--secondary);
 }
 
 .badge-1 {
-    top: 50px;
-    left: -50px;
+    top: 40px;
+    left: 10px;
 }
 
 .badge-2 {
-    bottom: 60px;
-    right: -40px;
+    bottom: 50px;
+    right: 10px;
     animation-delay: -2s;
 }
 
