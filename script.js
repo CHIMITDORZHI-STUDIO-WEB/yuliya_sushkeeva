@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClose = document.querySelector('.modal-close');
     const modalTitle = document.querySelector('.modal-title');
     const modalDesc = document.querySelector('.modal-desc');
-    const modalIcon = document.querySelector('.modal-icon i');
+    const modalImg = document.querySelector('.modal-img');
 
     // Open Modal
     document.querySelectorAll('.product-modal-trigger').forEach(btn => {
@@ -213,16 +213,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Extract info from card
             const title = card.querySelector('h3').textContent;
             const desc = card.querySelector('.product-desc').textContent;
-            const iconClass = card.querySelector('.product-image i').className;
+            const imgSrc = card.querySelector('.product-image img').src;
 
             // Update modal
             modalTitle.textContent = title;
             modalDesc.textContent = desc;
-            modalIcon.className = iconClass;
+            modalImg.src = imgSrc;
 
             // Show modal
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         });
     });
 

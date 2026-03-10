@@ -655,8 +655,10 @@ h4 {
 
 .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .product-card {
@@ -677,25 +679,25 @@ h4 {
 }
 
 .product-image {
-    background: linear-gradient(135deg, rgba(0, 77, 64, 0.05), rgba(0, 150, 136, 0.15));
-    height: 220px;
+    background: linear-gradient(135deg, rgba(0, 77, 64, 0.03), rgba(0, 150, 136, 0.08));
+    height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
+    padding: 1rem;
 }
 
-.product-image i {
-    font-size: 4rem;
-    color: var(--primary);
-    opacity: 0.7;
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     transition: var(--transition);
 }
 
-.product-card:hover .product-image i {
-    transform: scale(1.1);
-    color: var(--secondary);
-    opacity: 1;
+.product-card:hover .product-image img {
+    transform: scale(1.08);
 }
 
 .product-info {
@@ -796,10 +798,23 @@ h4 {
     color: var(--secondary);
 }
 
-.modal-icon i {
-    font-size: 3rem;
-    color: var(--secondary);
-    margin-bottom: 1rem;
+.modal-img-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 77, 64, 0.03), rgba(0, 150, 136, 0.08));
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .modal-title {
@@ -916,6 +931,44 @@ h4 {
     transform: translateY(-50%);
     font-size: 15rem;
     color: rgba(255, 255, 255, 0.05);
+}
+
+/* ====== TRUST / LEGAL SECTION ====== */
+.trust {
+    padding: 4rem 2rem;
+    background: var(--white);
+    text-align: center;
+}
+
+.trust-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--primary);
+    padding: 3rem;
+    border-radius: var(--radius-md);
+}
+
+.trust-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.trust-subtitle {
+    color: var(--text-muted);
+    margin-top: 1rem;
+}
+
+.trust-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.trust-item span {
+    font-size: 0.85rem;
+    color: #777;
 }
 
 /* ====== FOOTER ====== */
@@ -1036,6 +1089,10 @@ footer p {
 
     .contact-card {
         padding: 3rem 2rem;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
