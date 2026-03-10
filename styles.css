@@ -1193,13 +1193,18 @@ footer p {
     }
 
     .card {
+        width: 78vw;
         min-width: 78vw;
+        max-width: 78vw;
         scroll-snap-align: center;
         flex-shrink: 0;
         padding: 1.8rem 1.3rem;
         /* Override reveal for swipe cards */
         opacity: 1 !important;
         transform: none !important;
+        /* Force text wrapping */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     .card:hover {
