@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ====== STICKY NAVBAR ====== */
     const navbar = document.getElementById('navbar');
-
     let lastKnownScrollY = 0;
     let navTicking = false;
 
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navTicking = true;
         }
     }
-
     window.addEventListener('scroll', onNavScroll, { passive: true });
 
     /* ====== SCROLL REVEAL ====== */
@@ -42,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 counted = true;
                 statNumbers.forEach(stat => {
                     const target = parseInt(stat.dataset.target, 10);
-                    const duration = 1800;
+                    const duration = 2000;
                     const steps = duration / 16;
                     const increment = target / steps;
                     let current = 0;
@@ -53,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             stat.textContent = Math.ceil(current);
                             requestAnimationFrame(tick);
                         } else {
-                            // Show "+" only for big round numbers
-                            stat.textContent = target >= 100 ? target + '+' : target;
+                            stat.textContent = target; // No '+' needed for typical years/tests
                         }
                     }
                     tick();
@@ -89,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function (e) {
             createRipple(this, e.clientX, e.clientY);
         });
-
         btn.addEventListener('touchstart', function (e) {
             const t = e.touches[0];
             createRipple(this, t.clientX, t.clientY);
@@ -100,20 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const parallaxShapes = document.querySelectorAll('[data-parallax]');
     let pxTicking = false;
 
-    function updateParallax() {
-        const sy = window.scrollY;
-        parallaxShapes.forEach(shape => {
-            const speed = parseFloat(shape.dataset.parallax);
-            // Only modify translateY, leave other transforms intact
-            shape.style.transform = `translateY(${sy * speed * -1}px)`;
-        });
-        pxTicking = false;
-    }
-
     if (parallaxShapes.length) {
         window.addEventListener('scroll', () => {
             if (!pxTicking) {
-                requestAnimationFrame(updateParallax);
+                requestAnimationFrame(() => {
+                    const sy = window.scrollY;
+                    parallaxShapes.forEach(shape => {
+                        const speed = parseFloat(shape.dataset.parallax);
+                        shape.style.transform = `translateY(${sy * speed * -1}px)`;
+                    });
+                    pxTicking = false;
+                });
                 pxTicking = true;
             }
         }, { passive: true });
@@ -125,17 +118,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section[id]');
 
     if (bottomTabBar && tabItems.length) {
-
-        // Active section tracking
         const sectObs = new IntersectionObserver((entries) => {
+            let activeId = '';
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    tabItems.forEach(tab => {
-                        tab.classList.toggle('active', tab.dataset.section === id);
-                    });
+                    activeId = entry.target.id;
                 }
             });
+            if (activeId) {
+                tabItems.forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.section === activeId);
+                });
+            }
         }, { threshold: 0.25, rootMargin: '-10% 0px -55% 0px' });
 
         sections.forEach(sec => sectObs.observe(sec));
@@ -160,55 +154,100 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        // Smooth scroll on click
-        tabItems.forEach(tab => {
-            tab.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.getElementById(tab.getAttribute('href').substring(1));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Smooth scroll on click (overrides default jump)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    e.preventDefault();
+                    if (targetId === 'home') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 }
             });
         });
     }
 
-    /* ====== SWIPE CARDS — DOT INDICATOR ====== */
-    const cardsGrid = document.querySelector('.cards-grid');
-    const dots = document.querySelectorAll('.swipe-dots .dot');
+    /* ====== CATALOG FILTERING ====== */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
 
-    if (cardsGrid && dots.length) {
-        let dotTicking = false;
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add to current
+            btn.classList.add('active');
 
-        cardsGrid.addEventListener('scroll', () => {
-            if (!dotTicking) {
-                requestAnimationFrame(() => {
-                    const cards = cardsGrid.querySelectorAll('.card');
-                    if (!cards.length) return;
+            const filterValue = btn.getAttribute('data-filter');
 
-                    const containerLeft = cardsGrid.scrollLeft;
-                    const containerCenter = containerLeft + cardsGrid.offsetWidth / 2;
+            productCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.style.display = 'flex';
+                    // Re-trigger reveal animation for smoothness
+                    card.classList.remove('active');
+                    setTimeout(() => card.classList.add('active'), 10);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
 
-                    let activeIdx = 0;
-                    let minDist = Infinity;
+    /* ====== PRODUCT MODAL ====== */
+    const modal = document.getElementById('productModal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalTitle = document.querySelector('.modal-title');
+    const modalDesc = document.querySelector('.modal-desc');
+    const modalIcon = document.querySelector('.modal-icon i');
 
-                    cards.forEach((card, i) => {
-                        const cardCenter = card.offsetLeft - cardsGrid.offsetLeft + card.offsetWidth / 2;
-                        const dist = Math.abs(containerCenter - cardCenter);
-                        if (dist < minDist) {
-                            minDist = dist;
-                            activeIdx = i;
-                        }
-                    });
+    // Open Modal
+    document.querySelectorAll('.product-modal-trigger').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = e.target.closest('.product-card');
 
-                    dots.forEach((dot, i) => {
-                        dot.classList.toggle('active', i === activeIdx);
-                    });
+            // Extract info from card
+            const title = card.querySelector('h3').textContent;
+            const desc = card.querySelector('.product-desc').textContent;
+            const iconClass = card.querySelector('.product-image i').className;
 
-                    dotTicking = false;
-                });
-                dotTicking = true;
-            }
-        }, { passive: true });
+            // Update modal
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            modalIcon.className = iconClass;
+
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+    });
+
+    // Close Modal functions
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
+
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+
+    // Close on outside click
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+
+    // Close modal when CTA button is clicked
+    document.querySelectorAll('.close-target').forEach(btn => {
+        btn.addEventListener('click', closeModal);
+    });
 
 });
