@@ -17,7 +17,9 @@
         rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl0HPNiecjHem/PY0MlBkKEx68TpDL/zD7qlSE/Y+VE0mlHdFi6a2B+HyDwjpM9G0TwfEhqlTkFdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <link rel="stylesheet" href="styles.css?v=3">
 </head>
@@ -163,11 +165,11 @@
         </div>
 
         <!-- Category Filters -->
-        <div class="catalog-filters reveal">
-            <button class="filter-btn active ripple-btn" data-filter="all">Всё</button>
-            <button class="filter-btn ripple-btn" data-filter="health">Флагманы здоровья</button>
-            <button class="filter-btn ripple-btn" data-filter="target">Целевые пептиды</button>
-            <button class="filter-btn ripple-btn" data-filter="cosmetics">Косметика ELANARA</button>
+        <div class="catalog-filters reveal" role="tablist" aria-label="Фильтр продукции">
+            <button class="filter-btn active ripple-btn" data-filter="all" role="tab" aria-selected="true">Всё</button>
+            <button class="filter-btn ripple-btn" data-filter="health" role="tab" aria-selected="false">Флагманы здоровья</button>
+            <button class="filter-btn ripple-btn" data-filter="target" role="tab" aria-selected="false">Целевые пептиды</button>
+            <button class="filter-btn ripple-btn" data-filter="cosmetics" role="tab" aria-selected="false">Косметика ELANARA</button>
         </div>
 
         <div class="catalog-grid">
@@ -175,7 +177,7 @@
             <!-- Item 1 -->
             <div class="product-card reveal ripple-btn" data-category="health">
                 <div class="product-image">
-                    <img src="images/product_yak.png" alt="Пептиды коллагена кости тибетского яка">
+                    <img loading="lazy" src="images/product_yak.png" alt="Пептиды коллагена кости тибетского яка">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Флагман здоровья</div>
@@ -189,7 +191,7 @@
             <!-- Item 2 -->
             <div class="product-card reveal ripple-btn" data-category="health">
                 <div class="product-image">
-                    <img src="images/product_pgar.png" alt="Антивозрастной комплекс PGAR">
+                    <img loading="lazy" src="images/product_pgar.png" alt="Антивозрастной комплекс PGAR">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Флагман здоровья</div>
@@ -203,7 +205,7 @@
             <!-- Item 3 -->
             <div class="product-card reveal ripple-btn" data-category="health">
                 <div class="product-image">
-                    <img src="images/product_spirulina.png" alt="Пептиды спирулины">
+                    <img loading="lazy" src="images/product_spirulina.png" alt="Пептиды спирулины">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Флагман здоровья</div>
@@ -217,7 +219,7 @@
             <!-- Item 4 -->
             <div class="product-card reveal ripple-btn" data-category="health">
                 <div class="product-image">
-                    <img src="images/product_gut.png" alt="Двойная пептидная формула для ЖКТ">
+                    <img loading="lazy" src="images/product_gut.png" alt="Двойная пептидная формула для ЖКТ">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Флагман здоровья</div>
@@ -231,7 +233,7 @@
             <!-- Item 5 -->
             <div class="product-card reveal ripple-btn" data-category="target">
                 <div class="product-image">
-                    <img src="images/product_brain.png" alt="Пептиды для мозга">
+                    <img loading="lazy" src="images/product_brain.png" alt="Пептиды для мозга">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Целевые пептиды</div>
@@ -245,7 +247,7 @@
             <!-- Item 6 -->
             <div class="product-card reveal ripple-btn" data-category="target">
                 <div class="product-image">
-                    <img src="images/product_vision.png" alt="Пептиды для зрения">
+                    <img loading="lazy" src="images/product_vision.png" alt="Пептиды для зрения">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Целевые пептиды</div>
@@ -259,7 +261,7 @@
             <!-- Item 7 -->
             <div class="product-card reveal ripple-btn" data-category="target">
                 <div class="product-image">
-                    <img src="images/product_lotus.png" alt="Снежный Лотос">
+                    <img loading="lazy" src="images/product_lotus.png" alt="Снежный Лотос">
                 </div>
                 <div class="product-info">
                     <div class="product-category">Целевые пептиды</div>
@@ -273,7 +275,7 @@
             <!-- Item 8 -->
             <div class="product-card reveal ripple-btn" data-category="cosmetics">
                 <div class="product-image">
-                    <img src="images/product_golden.png" alt="Набор Золотой костюм">
+                    <img loading="lazy" src="images/product_golden.png" alt="Набор Золотой костюм">
                 </div>
                 <div class="product-info">
                     <div class="product-category">ELANARA Косметика</div>
@@ -287,7 +289,7 @@
             <!-- Item 9 -->
             <div class="product-card reveal ripple-btn" data-category="cosmetics">
                 <div class="product-image">
-                    <img src="images/product_essence.png" alt="Пептидная эссенция">
+                    <img loading="lazy" src="images/product_essence.png" alt="Пептидная эссенция">
                 </div>
                 <div class="product-info">
                     <div class="product-category">ELANARA Косметика</div>
@@ -301,7 +303,7 @@
             <!-- Item 10 -->
             <div class="product-card reveal ripple-btn" data-category="cosmetics">
                 <div class="product-image">
-                    <img src="images/product_spray.png" alt="Увлажняющий пептидный спрей">
+                    <img loading="lazy" src="images/product_spray.png" alt="Увлажняющий пептидный спрей">
                 </div>
                 <div class="product-info">
                     <div class="product-category">ELANARA Косметика</div>
@@ -359,11 +361,11 @@
                         <div class="icon-circle"><i class="fas fa-envelope"></i></div>
                         <span>623179@mail.ru</span>
                     </a>
-                    <a href="https://t.me/yuliya_sushkeeva" target="_blank" class="contact-link ripple-btn">
+                    <a href="https://t.me/yuliya_sushkeeva" target="_blank" rel="noopener noreferrer" class="contact-link ripple-btn">
                         <div class="icon-circle"><i class="fab fa-telegram-plane"></i></div>
                         <span>@yuliya_sushkeeva (Telegram)</span>
                     </a>
-                    <a href="https://instagram.com/yuliya_sushkeeva" target="_blank" class="contact-link ripple-btn">
+                    <a href="https://instagram.com/yuliya_sushkeeva" target="_blank" rel="noopener noreferrer" class="contact-link ripple-btn">
                         <div class="icon-circle"><i class="fab fa-instagram"></i></div>
                         <span>@yuliya_sushkeeva (Instagram)</span>
                     </a>
@@ -385,11 +387,11 @@
     </footer>
 
     <!-- Product Details Modal -->
-    <div class="modal-overlay" id="productModal">
+    <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitleId">
         <div class="modal-content">
-            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <button class="modal-close" aria-label="Закрыть"><i class="fas fa-times"></i></button>
             <div class="modal-img-wrap"><img class="modal-img" src="" alt="Продукт"></div>
-            <h3 class="modal-title">Название продукта</h3>
+            <h3 class="modal-title" id="modalTitleId">Название продукта</h3>
             <p class="modal-desc">Описание продукта.</p>
             <div class="modal-actions">
                 <a href="#contacts" class="btn btn-primary ripple-btn close-target">Узнать цену и заказать</a>
